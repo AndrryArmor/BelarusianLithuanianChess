@@ -1,0 +1,22 @@
+﻿<Window x:Class="BelarusChess.UI.Views.GameWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:utils="clr-namespace:BelarusChess.UI.Utils"
+        mc:Ignorable="d"
+        Title="Білоруські шахи" WindowStartupLocation="CenterScreen" Width="815" Height="555" ResizeMode="CanMinimize" Icon="../Resources/BelarusChess.png">
+    <Window.Resources>
+        <utils:TimeSpanToStringConverter x:Key="TimeSpanToStringConverter" />
+    </Window.Resources>
+    <Grid x:Name="grid">
+        <Image x:Name="imageChessboard" HorizontalAlignment="Left" Margin="10,10,0,10" Width="495" Height="495" VerticalAlignment="Top" Source="../Resources/Chessboard.png"/>
+        <Button x:Name="buttonNewGame" Content="Нова гра" HorizontalAlignment="Left" Height="55" Margin="510,10,0,0" VerticalAlignment="Top" Width="200" FontSize="24" Background="#FFDDDDDD" BorderBrush="{x:Null}" Command="{Binding StartGameCommand}" IsEnabled="{Binding IsNewGameButtonEnabled}"/>
+        <Label x:Name="labelTime" HorizontalAlignment="Left" Height="119" Margin="510,199,0,0" VerticalAlignment="Top" Width="200" FontSize="48" HorizontalContentAlignment="Center" BorderThickness="1" VerticalContentAlignment="Center" Background="#FFF1B481" Content="{Binding Time, Converter={StaticResource TimeSpanToStringConverter}}"/>
+        <Button x:Name="buttonFinishGame" Content="Завершити гру" HorizontalAlignment="Left" Height="55" Margin="510,449,0,10" VerticalAlignment="Top" Width="200" BorderBrush="{x:Null}" Background="#FFDDDDDD" FontSize="24" Command="{Binding FinishGameCommand}" IsEnabled="{Binding IsFinishGameButtonEnabled}"/>
+        <Button x:Name="buttonHelp" HorizontalAlignment="Left" Height="119" Margin="715,199,10,4" VerticalAlignment="Top" Width="77" FontSize="16" Content="Довідка" BorderBrush="{x:Null}"/>
+        <Label x:Name="labelBlackPlayer" HorizontalAlignment="Left" Height="50" Margin="510,144,0,0" VerticalAlignment="Top" Width="282" FontSize="24" Foreground="#FFE6330B" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="{Binding BlackPlayerState}"/>
+        <Label x:Name="labelWhitePlayer" HorizontalAlignment="Left" Height="50" Margin="510,323,0,0" VerticalAlignment="Top" Width="282" FontSize="24" Foreground="#FFE6330B" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="{Binding WhitePlayerState}"/>
+    </Grid>
+</Window>

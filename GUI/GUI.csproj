@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{288EEA27-6A6E-45A0-9014-7DDF83F9EE05}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>BelarusianLithuanianChess.GUI</RootNamespace>
+    <RootNamespace>BelarusChess.GUI</RootNamespace>
     <AssemblyName>GUI</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>BelarusChess.App</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -55,18 +58,40 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
+    <Compile Include="BoardImageViewModelBase.cs" />
+    <Compile Include="RelayCommand.cs" />
+    <Compile Include="Utils\TimeSpanToStringConverter.cs" />
+    <Compile Include="ViewModelBase.cs" />
+    <Compile Include="ViewModels\GameViewModel.cs" />
+    <Compile Include="ViewModels\HelpViewModel.cs" />
+    <Compile Include="ViewModels\HighlightViewModel.cs" />
+    <Compile Include="ViewModels\PieceViewModel.cs" />
+    <Compile Include="Views\EnterWindow.xaml.cs">
+      <DependentUpon>EnterWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GameWindow.xaml.cs">
+      <DependentUpon>GameWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HelpWindow.xaml.cs">
+      <DependentUpon>HelpWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Enums\HighlightType.cs" />
+    <Page Include="Views\EnterWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\GameWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\HelpWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -93,6 +118,44 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\PiecesSprites\Black bishop.png" />
+    <Resource Include="Resources\PiecesSprites\Black king.png" />
+    <Resource Include="Resources\PiecesSprites\Black knight.png" />
+    <Resource Include="Resources\PiecesSprites\Black pawn.png" />
+    <Resource Include="Resources\PiecesSprites\Black prince.png" />
+    <Resource Include="Resources\PiecesSprites\Black queen.png" />
+    <Resource Include="Resources\PiecesSprites\Black rook.png" />
+    <Resource Include="Resources\PiecesSprites\White bishop.png" />
+    <Resource Include="Resources\PiecesSprites\White king.png" />
+    <Resource Include="Resources\PiecesSprites\White knight.png" />
+    <Resource Include="Resources\PiecesSprites\White pawn.png" />
+    <Resource Include="Resources\PiecesSprites\White prince.png" />
+    <Resource Include="Resources\PiecesSprites\White queen.png" />
+    <Resource Include="Resources\PiecesSprites\White rook.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\BelarusChess.png" />
+    <Resource Include="Resources\Chess image.png" />
+    <Resource Include="Resources\Chessboard.png" />
+    <Resource Include="Resources\Highlight check.png" />
+    <Resource Include="Resources\Highlight choosed piece.png" />
+    <Resource Include="Resources\Highlight mouse move cell.png" />
+    <Resource Include="Resources\Highlight valid move on piece.png" />
+    <Resource Include="Resources\Highlight valid move.png" />
+    <Resource Include="Resources\Шаховий інтерфейс.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core.Entities\Core.Entities.csproj">
+      <Project>{4015ed0a-734e-48af-abd0-3a82c267f7e1}</Project>
+      <Name>Core.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Logic\Core.Logic.csproj">
+      <Project>{7ea7bc05-59b8-4aa2-9dbe-4fede6649a13}</Project>
+      <Name>Core.Logic</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
