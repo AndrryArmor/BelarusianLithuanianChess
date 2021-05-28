@@ -65,6 +65,7 @@
     <Compile Include="ViewModels\GameViewModel.cs" />
     <Compile Include="ViewModels\HelpViewModel.cs" />
     <Compile Include="ViewModels\HighlightViewModel.cs" />
+    <Compile Include="ViewModels\NetworkConnectionViewModel.cs" />
     <Compile Include="ViewModels\PieceViewModel.cs" />
     <Compile Include="Views\EnterWindow.xaml.cs">
       <DependentUpon>EnterWindow.xaml</DependentUpon>
@@ -80,6 +81,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Enums\HighlightType.cs" />
+    <Compile Include="Views\NetworkConnectionWindow.xaml.cs">
+      <DependentUpon>NetworkConnectionWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="Views\EnterWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -91,6 +95,10 @@
     <Page Include="Views\HelpWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\NetworkConnectionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

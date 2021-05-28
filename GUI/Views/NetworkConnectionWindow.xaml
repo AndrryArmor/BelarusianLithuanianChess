@@ -1,0 +1,16 @@
+﻿<Window x:Class="BelarusChess.GUI.Views.NetworkConnectionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BelarusChess.GUI.Views"
+        mc:Ignorable="d"
+        Title="Мережеве приєднання" Height="325" Width="300">
+    <Grid>
+        <Button x:Name="ButtonCreateGame" Content="Створити гру" HorizontalAlignment="Center" Margin="71,10,71,0" VerticalAlignment="Top" Width="150" Height="50"/>
+        <Button x:Name="ButtonJoinGame" Content="Приєднатись до гри" HorizontalAlignment="Center" Margin="71,145,71,0" VerticalAlignment="Top" Width="150" Height="50"/>
+        <Label x:Name="LabelCreateGame" Content="Повідомлення про результат створення гри" HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.421,-0.5" Height="75
+               "/>
+        <Label x:Name="LabelJoinGame" Content="Повідомлення про результат приєднання до гри" HorizontalAlignment="Left" Margin="10,200,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.421,-0.5" Height="75" Width="272"/>
+    </Grid>
+</Window>
