@@ -14,7 +14,6 @@ namespace BelarusChess.Core.Logic.NetUtils
 
         public GameServer() : base()
         {
-            // Создаем сокет Tcp/Ip
             _listener = new Socket(_ipAddr.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
         }
 
@@ -22,10 +21,9 @@ namespace BelarusChess.Core.Logic.NetUtils
         {
             try
             {
-                // Назначаем сокет локальной конечной точке и слушаем входящие сокеты
                 _listener.Bind(_ipEndPoint);
                 _listener.Listen(10);
-                // Программа приостанавливается, ожидая входящее соединение
+
                 Socket = _listener.Accept();
                 return SocketError.Success;
             }
@@ -33,6 +31,12 @@ namespace BelarusChess.Core.Logic.NetUtils
             {
                 return SocketError.SocketError;
             }
+        }
+
+        public override void CloseConnnection()
+        {
+            base.CloseConnnection();
+            _listener.Close();
         }
     }
 }

@@ -24,6 +24,7 @@ namespace SocketClient
             }
             finally
             {
+                gameClient.CloseConnnection();
                 Console.ReadLine();
             }
         }

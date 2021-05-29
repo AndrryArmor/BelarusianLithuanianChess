@@ -17,37 +17,31 @@ namespace BelarusChess.Core.Logic.NetUtils
 
         protected GameEndPoint()
         {
-            // Устанавливаем для сокета локальную конечную точку
             IPHostEntry ipHost = Dns.GetHostEntry("localhost");
             _ipAddr = ipHost.AddressList[0];
             _ipEndPoint = new IPEndPoint(_ipAddr, _portNumber);            
-        }
-
-        ~GameEndPoint()
-        {
-            Socket.Shutdown(SocketShutdown.Both);
-            Socket.Close();
         }
 
         public Socket Socket { get; protected set; }
 
         public void Send<T>(T data)
         {
-            byte[] msg = JsonSerializer.SerializeToUtf8Bytes(data);
-
-            // Отправляем данные через сокет
-            int bytesSent = Socket.Send(msg);
+            byte[] dataBytes = JsonSerializer.SerializeToUtf8Bytes(data);
+            Socket.Send(dataBytes);
         }
 
         public T Receive<T>()
         {
-            // Мы дождались клиента, пытающегося с нами соединиться
+            byte[] buffer = new byte[1024];
+            int bytesCount = Socket.Receive(buffer);
 
-            byte[] bytes = new byte[1024];
-            int bytesRec = Socket.Receive(bytes);
+            return JsonSerializer.Deserialize<T>(new ReadOnlySpan<byte>(buffer, 0, bytesCount));
+        }
 
-            //data += Encoding.UTF8.GetString(bytes, 0, bytesRec);
-            return JsonSerializer.Deserialize<T>(new ReadOnlySpan<byte>(bytes, 0, bytesRec));
+        public virtual void CloseConnnection()
+        {
+            Socket.Shutdown(SocketShutdown.Both);
+            Socket.Close();
         }
     }
 }

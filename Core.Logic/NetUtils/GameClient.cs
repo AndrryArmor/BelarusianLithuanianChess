@@ -10,10 +10,8 @@ namespace BelarusChess.Core.Logic.NetUtils
 {
     public class GameClient : GameEndPoint
     {
-
         public GameClient() : base()
         {
-            // Создаем сокет Tcp/Ip
             Socket = new Socket(_ipAddr.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
         }
 
@@ -21,7 +19,6 @@ namespace BelarusChess.Core.Logic.NetUtils
         {
             try
             {
-                // Соединяем сокет с удаленной точкой
                 Socket.Connect(_ipEndPoint);
                 return SocketError.Success;
             }
