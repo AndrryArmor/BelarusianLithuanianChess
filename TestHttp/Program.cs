@@ -18,6 +18,8 @@ namespace SocketServer
 
             try
             {
+                Console.WriteLine(Dns.GetHostName());
+
                 Console.WriteLine("Очікуємо з'єднання через порт {0}", 11000);
 
                 gameServer.ListenForHandshake();

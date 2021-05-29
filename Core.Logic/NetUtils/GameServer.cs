@@ -27,8 +27,9 @@ namespace BelarusChess.Core.Logic.NetUtils
                 Socket = _listener.Accept();
                 return SocketError.Success;
             }
-            catch (SocketException)
+            catch (SocketException ex)
             {
+                Console.WriteLine(ex.Message);
                 return SocketError.SocketError;
             }
         }

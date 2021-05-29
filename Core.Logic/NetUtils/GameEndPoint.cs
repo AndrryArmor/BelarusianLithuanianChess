@@ -16,6 +16,7 @@ namespace BelarusChess.Core.Logic.NetUtils
         protected GameEndPoint()
         {
             IPAddress = Dns.GetHostEntry(Dns.GetHostName()).AddressList[0]; 
+            Console.WriteLine(IPAddress);
         }
 
         public readonly IPAddress IPAddress;
