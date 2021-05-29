@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text.Json;
 using BelarusChess.Core.Entities;
+using BelarusChess.Core.Logic.NetUtils;
 
 namespace SocketClient
 {
@@ -11,9 +12,11 @@ namespace SocketClient
     {
         static void Main(string[] args)
         {
+            GameClient gameClient = new GameClient();
+             
             try
             {
-                SendMessageFromSocket(11000);
+                SendMessageFromSocket(gameClient);
             }
             catch (Exception ex)
             {
@@ -25,52 +28,27 @@ namespace SocketClient
             }
         }
 
-        static void SendMessageFromSocket(int port)
+        static void SendMessageFromSocket(GameClient gameClient)
         {
-            // Буфер для входящих данных
-            byte[] bytes = new byte[1024];
-
-            // Соединяемся с удаленным устройством
-
-            // Устанавливаем удаленную точку для сокета
-            IPHostEntry ipHost = Dns.GetHostEntry("localhost");
-            IPAddress ipAddr = ipHost.AddressList[0];
-            IPEndPoint ipEndPoint = new IPEndPoint(ipAddr, port);
-
-            Socket sender = new Socket(ipAddr.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-
-            // Соединяем сокет с удаленной точкой
-            sender.Connect(ipEndPoint);
+            gameClient.HandshakeGameHost();
 
             Console.Write("Введіть шаховий хід: ");
             string move = Console.ReadLine();
 
-            Console.WriteLine("Сокет з'єднується з {0} ", sender.RemoteEndPoint.ToString());
-            //byte[] msg = Encoding.UTF8.GetBytes(message);
+            Console.WriteLine("Сокет з'єднується з {0} ", gameClient.Socket.RemoteEndPoint.ToString());
+
             Chessboard chessboard = new Chessboard();
             var moveDto = new MoveDto
             {
                 PieceCell = new Cell(7, 3),
                 PieceNewCell = new Cell(5, 3)
             };
-            byte[] msg = JsonSerializer.SerializeToUtf8Bytes(moveDto);
+            
+            gameClient.Send(moveDto);
 
-            // Отправляем данные через сокет
-            int bytesSent = sender.Send(msg);
+            StringModel stringModel = gameClient.Receive<StringModel>();
 
-            // Получаем ответ от сервера
-            int bytesRec = sender.Receive(bytes);
-
-            Console.WriteLine("\nВідповідь від сервера: {0}\n\n", /*Encoding.UTF8.GetString(bytes, 0, bytesRec)*/ 
-                JsonSerializer.Deserialize<StringModel>(new ReadOnlySpan<byte>(bytes, 0, bytesRec)).Text);
-
-            // Используем рекурсию для неоднократного вызова SendMessageFromSocket()
-            if (move.IndexOf("quit") == -1)
-                SendMessageFromSocket(port);
-
-            // Освобождаем сокет
-            sender.Shutdown(SocketShutdown.Both);
-            sender.Close();
+            Console.WriteLine("\nВідповідь від сервера: {0}\n\n", stringModel.Text);
         }
     }
 }
