@@ -41,8 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MoveDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core.Entities\Core.Entities.csproj">
+      <Project>{4015ED0A-734E-48AF-ABD0-3A82C267F7E1}</Project>
+      <Name>Core.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

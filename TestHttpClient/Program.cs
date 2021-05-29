@@ -3,6 +3,7 @@ using System.Text;
 using System.Net;
 using System.Net.Sockets;
 using System.Text.Json;
+using BelarusChess.Core.Entities;
 
 namespace SocketClient
 {
@@ -41,13 +42,18 @@ namespace SocketClient
             // Соединяем сокет с удаленной точкой
             sender.Connect(ipEndPoint);
 
-            Console.Write("Введите сообщение: ");
-            string message = Console.ReadLine();
+            Console.Write("Введіть шаховий хід: ");
+            string move = Console.ReadLine();
 
-            Console.WriteLine("Сокет соединяется с {0} ", sender.RemoteEndPoint.ToString());
+            Console.WriteLine("Сокет з'єднується з {0} ", sender.RemoteEndPoint.ToString());
             //byte[] msg = Encoding.UTF8.GetBytes(message);
-            var stringModel = new StringModel { Text = message };
-            byte[] msg = JsonSerializer.SerializeToUtf8Bytes(stringModel);
+            Chessboard chessboard = new Chessboard();
+            var moveDto = new MoveDto
+            {
+                PieceCell = new Cell(7, 3),
+                PieceNewCell = new Cell(5, 3)
+            };
+            byte[] msg = JsonSerializer.SerializeToUtf8Bytes(moveDto);
 
             // Отправляем данные через сокет
             int bytesSent = sender.Send(msg);
@@ -55,11 +61,11 @@ namespace SocketClient
             // Получаем ответ от сервера
             int bytesRec = sender.Receive(bytes);
 
-            Console.WriteLine("\nОтвет от сервера: {0}\n\n", /*Encoding.UTF8.GetString(bytes, 0, bytesRec)*/ 
+            Console.WriteLine("\nВідповідь від сервера: {0}\n\n", /*Encoding.UTF8.GetString(bytes, 0, bytesRec)*/ 
                 JsonSerializer.Deserialize<StringModel>(new ReadOnlySpan<byte>(bytes, 0, bytesRec)).Text);
 
             // Используем рекурсию для неоднократного вызова SendMessageFromSocket()
-            if (message.IndexOf("<TheEnd>") == -1)
+            if (move.IndexOf("quit") == -1)
                 SendMessageFromSocket(port);
 
             // Освобождаем сокет

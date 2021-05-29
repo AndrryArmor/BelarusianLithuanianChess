@@ -79,6 +79,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core.Entities\Core.Entities.csproj">
+      <Project>{4015ED0A-734E-48AF-ABD0-3A82C267F7E1}</Project>
+      <Name>Core.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StringFormat\StringFormat.csproj">
       <Project>{020c3cdb-ff83-4e19-97e9-6016c7edca43}</Project>
       <Name>StringFormat</Name>
