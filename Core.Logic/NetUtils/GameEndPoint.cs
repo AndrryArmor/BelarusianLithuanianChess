@@ -11,17 +11,14 @@ namespace BelarusChess.Core.Logic.NetUtils
 {
     public abstract class GameEndPoint
     {
-        private const int _portNumber = 11000;
-        protected readonly IPEndPoint _ipEndPoint;
-        protected readonly IPAddress _ipAddr;
+        protected const int _portNumber = 11000;
 
         protected GameEndPoint()
         {
-            IPHostEntry ipHost = Dns.GetHostEntry("localhost");
-            _ipAddr = ipHost.AddressList[0];
-            _ipEndPoint = new IPEndPoint(_ipAddr, _portNumber);            
+            IPAddress = Dns.GetHostEntry(Dns.GetHostName()).AddressList[0]; 
         }
 
+        public readonly IPAddress IPAddress;
         public Socket Socket { get; protected set; }
 
         public void Send<T>(T data)

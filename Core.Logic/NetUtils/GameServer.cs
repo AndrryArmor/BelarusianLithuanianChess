@@ -14,20 +14,20 @@ namespace BelarusChess.Core.Logic.NetUtils
 
         public GameServer() : base()
         {
-            _listener = new Socket(_ipAddr.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+            _listener = new Socket(IPAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
         }
 
         public SocketError ListenForHandshake()
         {
             try
             {
-                _listener.Bind(_ipEndPoint);
+                _listener.Bind(new IPEndPoint(IPAddress, _portNumber));
                 _listener.Listen(10);
 
                 Socket = _listener.Accept();
                 return SocketError.Success;
             }
-            catch (Exception)
+            catch (SocketException)
             {
                 return SocketError.SocketError;
             }

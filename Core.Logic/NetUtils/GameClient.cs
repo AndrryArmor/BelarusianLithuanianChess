@@ -12,20 +12,26 @@ namespace BelarusChess.Core.Logic.NetUtils
     {
         public GameClient() : base()
         {
-            Socket = new Socket(_ipAddr.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+            Socket = new Socket(IPAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
         }
 
-        public SocketError HandshakeGameHost()
+        public SocketError HandshakeGameHost(string hostName)
         {
-            try
+            var addressList = Dns.GetHostEntry(hostName).AddressList
+                .Where(address => address.AddressFamily == IPAddress.AddressFamily);
+            foreach (var ipAdress in addressList)
             {
-                Socket.Connect(_ipEndPoint);
-                return SocketError.Success;
+                try
+                {
+                    Socket.Connect(ipAdress, _portNumber);
+                    return SocketError.Success;
+                }
+                catch (SocketException ex)
+                {
+                }
             }
-            catch (Exception)
-            {
-                return SocketError.SocketError;
-            }
+            
+            return SocketError.SocketError;
         }
     }
 }
