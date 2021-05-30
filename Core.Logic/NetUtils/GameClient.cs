@@ -17,8 +17,17 @@ namespace BelarusChess.Core.Logic.NetUtils
 
         public SocketError HandshakeGameHost(string hostName)
         {
-            var addressList = Dns.GetHostEntry(hostName).AddressList
-                .Where(address => address.AddressFamily == IPAddress.AddressFamily);
+            var addressList = new List<IPAddress>();
+            try
+            {
+                addressList = Dns.GetHostEntry(hostName).AddressList
+                        .Where(address => address.AddressFamily == IPAddress.AddressFamily).ToList();
+            }
+            catch (SocketException ex)
+            {
+                return SocketError.SocketError;
+            }
+
             foreach (var ipAdress in addressList)
             {
                 try

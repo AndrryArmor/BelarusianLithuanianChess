@@ -1,16 +1,24 @@
-﻿<Window x:Class="BelarusChess.GUI.Views.NetworkConnectionWindow"
+﻿<Window x:Class="BelarusChess.UI.Views.NetworkConnectionWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:BelarusChess.GUI.Views"
+        xmlns:local="clr-namespace:BelarusChess.UI.Views" xmlns:viewmodels="clr-namespace:BelarusChess.UI.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:NetworkConnectionViewModel}"
         mc:Ignorable="d"
-        Title="Мережеве приєднання" Height="325" Width="300">
+        Title="Під'єднання по мережі" Height="213" Width="500">
     <Grid>
-        <Button x:Name="ButtonCreateGame" Content="Створити гру" HorizontalAlignment="Center" Margin="71,10,71,0" VerticalAlignment="Top" Width="150" Height="50"/>
-        <Button x:Name="ButtonJoinGame" Content="Приєднатись до гри" HorizontalAlignment="Center" Margin="71,145,71,0" VerticalAlignment="Top" Width="150" Height="50"/>
-        <Label x:Name="LabelCreateGame" Content="Повідомлення про результат створення гри" HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.421,-0.5" Height="75
-               "/>
-        <Label x:Name="LabelJoinGame" Content="Повідомлення про результат приєднання до гри" HorizontalAlignment="Left" Margin="10,200,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.421,-0.5" Height="75" Width="272"/>
+        <GroupBox x:Name="groupBoxCreateGame" Header="Створити гру" HorizontalAlignment="Left" Height="160" Margin="10,10,0,0" VerticalAlignment="Top" Width="238" FontSize="18" IsEnabled="{Binding IsGroupBoxCreateGameEnabled}">
+            <Grid Margin="0">
+                <Button x:Name="buttonCreateGame" Content="Створити гру" HorizontalAlignment="Center" Margin="10,71,10,0" VerticalAlignment="Top" Width="206" Height="50" FontSize="18" Command="{Binding CreateGameCommand}"/>
+                <TextBox x:Name="textBoxCreateGameStatus" HorizontalAlignment="Left" Height="66" TextWrapping="Wrap" VerticalAlignment="Top" Width="226" MaxLines="1" MaxLength="25" FontSize="12" Background="White" BorderBrush="{x:Null}" Text="{Binding CreateGameStatus}" IsReadOnly="True"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox x:Name="groupBoxJoinGame" Header="Приєднатися до гри" HorizontalAlignment="Left" Height="160" Margin="253,10,0,0" VerticalAlignment="Top" Width="229" ClipToBounds="True" FontSize="18" IsEnabled="{Binding IsGroupBoxJoinGameEnabled}">
+            <Grid Margin="0" ScrollViewer.VerticalScrollBarVisibility="Disabled" ClipToBounds="True">
+                <Button x:Name="buttonJoinGame" Content="Приєднатись до гри" HorizontalAlignment="Center" Margin="10,70,10,0" VerticalAlignment="Top" Width="197" Height="50" FontSize="18" Command="{Binding JoinGameCommand}"/>
+                <Label x:Name="labelInputServerName" Content="Введіть назву сервера, до якого&#xD;&#xA;хочете приєднатися:" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.421,-0.5" Width="197" FontSize="12"/>
+                <TextBox x:Name="textBoxServerName" HorizontalAlignment="Left" Height="23" Margin="10,42,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="197" MaxLines="1" MaxLength="25" FontSize="12" Text="{Binding ServerNameToJoin}"/>
+            </Grid>
+        </GroupBox>
     </Grid>
 </Window>

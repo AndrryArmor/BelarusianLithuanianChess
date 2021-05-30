@@ -15,11 +15,11 @@ namespace BelarusChess.Core.Logic.NetUtils
 
         protected GameEndPoint()
         {
-            IPAddress = Dns.GetHostEntry(Dns.GetHostName()).AddressList[0]; 
+            IPAddress = Dns.GetHostEntry(Dns.GetHostName()).AddressList[0];
             Console.WriteLine(IPAddress);
         }
 
-        public readonly IPAddress IPAddress;
+        public IPAddress IPAddress { get; }
         public Socket Socket { get; protected set; }
 
         public void Send<T>(T data)
