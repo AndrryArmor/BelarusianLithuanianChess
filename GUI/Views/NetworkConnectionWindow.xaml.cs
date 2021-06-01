@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BelarusChess.Core.Logic.NetUtils;
+using BelarusChess.UI.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,10 @@ namespace BelarusChess.UI.Views
     /// </summary>
     public partial class NetworkConnectionWindow : Window
     {
-        public NetworkConnectionWindow()
+        public NetworkConnectionWindow(LocalNetworkGameViewModel gameViewModel)
         {
             InitializeComponent();
+            DataContext = new NetworkConnectionViewModel(gameViewModel, this);
         }
     }
 }

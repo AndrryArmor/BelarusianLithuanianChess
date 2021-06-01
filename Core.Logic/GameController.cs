@@ -19,7 +19,7 @@ namespace BelarusChess.Core.Logic
         }
 
         public bool IsGameStarted { get; set; }
-        public PlayerColor CurrentPlayer { get; private set; }
+        public PlayerColor CurrentPlayer { get; set; }
         public PlayerState WhitePlayerState { get; private set; }
         public PlayerState BlackPlayerState { get; private set; }
 
@@ -47,7 +47,7 @@ namespace BelarusChess.Core.Logic
 
             SwitchPlayer();
         }
-
+        
         public void FinishGame()
         {
             IsGameStarted = false;

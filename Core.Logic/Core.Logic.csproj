@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChessEngine.cs" />
+    <Compile Include="Enums\PlayerStateExtension.cs" />
     <Compile Include="Enums\PlayerState.cs" />
     <Compile Include="GameController.cs" />
     <Compile Include="NetUtils\GameEndPoint.cs" />

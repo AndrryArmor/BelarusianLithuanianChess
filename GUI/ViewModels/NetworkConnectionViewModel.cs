@@ -13,7 +13,7 @@ namespace BelarusChess.UI.ViewModels
     public class NetworkConnectionViewModel : ViewModelBase
     {
         private readonly NetworkConnectionWindow _networkConnectionWindow;
-        private readonly GameViewModel _gameViewModel;
+        private readonly LocalNetworkGameViewModel _gameViewModel;
         private RelayCommand _createGameCommand;
         private RelayCommand _joinGameCommand;
         private bool isCreateGameButtonEnabled;
@@ -21,7 +21,7 @@ namespace BelarusChess.UI.ViewModels
         private string createGameStatus;
         private string serverNameToJoin;
 
-        public NetworkConnectionViewModel(GameViewModel gameViewModel, NetworkConnectionWindow networkConnectionWindow)
+        public NetworkConnectionViewModel(LocalNetworkGameViewModel gameViewModel, NetworkConnectionWindow networkConnectionWindow)
         {
             _networkConnectionWindow = networkConnectionWindow;
             _gameViewModel = gameViewModel;
@@ -85,7 +85,7 @@ namespace BelarusChess.UI.ViewModels
                         {
                         }
 
-                        //_gameViewModel.GameEndPoint = gameServer;
+                        _gameViewModel.GameEndPoint = gameServer;
                         await _networkConnectionWindow.Dispatcher.InvokeAsync(() =>
                         {
                             CreateGameStatus = $"Клієнт {gameServer.Socket.RemoteEndPoint} успішно приєднався до гри";
@@ -119,7 +119,7 @@ namespace BelarusChess.UI.ViewModels
                             case SocketError.Success:
                                 App.ShowMessage($"Клієнт успішно під'єднався до сервера {ServerNameToJoin}!");
 
-                                //_gameViewModel.GameEndPoint = gameClient;
+                                _gameViewModel.GameEndPoint = gameClient;
                                 _networkConnectionWindow.Dispatcher.InvokeAsync(() =>
                                 {
                                     _networkConnectionWindow.DialogResult = true;

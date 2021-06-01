@@ -38,8 +38,15 @@ namespace BelarusChess.Core.Logic.NetUtils
 
         public virtual void CloseConnnection()
         {
-            Socket.Shutdown(SocketShutdown.Both);
-            Socket.Close();
+            try
+            {
+                Socket.Shutdown(SocketShutdown.Both);
+            }
+            finally
+            {
+                Socket.Disconnect(false);
+                //Socket.Close();
+            }
         }
     }
 }

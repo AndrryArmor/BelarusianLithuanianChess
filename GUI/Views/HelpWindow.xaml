@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BelarusChess.UI.Views"
         mc:Ignorable="d"
-        Title="Довідка" Height="500" Width="500" WindowStartupLocation="Manual" Padding="6,0,0,0" SizeToContent="WidthAndHeight" ResizeMode="NoResize" Icon="../Resources/BelarusChess.png">
+        Title="Довідка" Height="600" Width="600" WindowStartupLocation="CenterScreen" Padding="6,0,0,0" SizeToContent="WidthAndHeight" ResizeMode="NoResize" Icon="../Resources/BelarusChess.png" Closing="Window_Closing" HorizontalAlignment="Left" VerticalAlignment="Top">
     <Grid>
-        <RichTextBox HorizontalAlignment="Left" Height="469" VerticalAlignment="Top" Width="492" VerticalScrollBarVisibility="Visible" Margin="0" Background="{x:Null}" ScrollViewer.CanContentScroll="True" AllowDrop="False">
+        <RichTextBox VerticalScrollBarVisibility="Visible" Margin="0" Background="{x:Null}" ScrollViewer.CanContentScroll="True" AllowDrop="False" Width="594" Height="571">
             <FlowDocument>
                 <Paragraph>
                     <Run FontWeight="Bold" FontSize="16" Text="Трохи історії" TextDecorations="{x:Null}"/>
@@ -31,10 +31,10 @@
                     <Run FontWeight="Bold" FontSize="16" Text="Правила гри"/>
                     <LineBreak/>
                     <LineBreak/>
-                    <Run Text="Ціль гравця: поставити на трон свого короля або принца, або ж вбити всю королівську сім'ю супротивника. На трон може сходити лише &quot;чинний&quot; король; ця дія супроводжується вигуком &quot;Престол мій!&quot; та перемогою відповідного гравця. Король не може сходити на престол, якщо він знаходиться під боєм. Якщо ж короля вбивають, але на полі досі є принц того ж гравця, то відбувається обов'язковий негайний хід - інавгурація. При цьому, новим &quot;чинним&quot; королем стає принц, а тому він повинен ходити лише, як король. Якщо на полі відсутній король або принц, то чинному королю можна поставити шах і мат - ще один спосіб виграти гру. Фігури, що можуть робити хід більш ніж на одну клітинку, окрім коня і княжича, не можуть переходити через престол. Вони можуть стати на престол, а тоді, за бажанням, рушити далі одним із наступних ходів." FontSize="14"/>
+                    <Run Text="Ціль гравця: поставити на трон свого короля або принца, або ж поставити мат королю при відсутності на полі принца. На престол може сходити лише &quot;чинний&quot; король; ця дія супроводжується вигуком &quot;Престол мій!&quot; та перемогою відповідного гравця. Всі інші фігури ставати на престол не можуть. Король не може сходити на престол, якщо він буде знаходитися під боєм. Якщо ж короля вбивають, але на полі досі є принц того ж гравця, то відбувається обов'язковий негайний хід - інавгурація. При цьому, новим &quot;чинним&quot; королем стає принц, а тому він повинен ходити лише як король. Якщо на полі відсутній король або принц, то чинному королю можна поставити шах і мат - ще один спосіб виграти гру. Фігури, що можуть робити хід більш ніж на одну клітинку, окрім коня і княжича, не можуть переходити через престол." FontSize="14"/>
                     <LineBreak/>
                     <LineBreak/>
-                    <Run Text="Гравцю оголошується перемога, якщо: його чинний король протримається на престолі 1 хід без оголошення рокашу, при цьому гравець вигукує &quot;Престол мій!&quot;; він ставить мат чинному королю противника." FontSize="14"/>
+                    <Run Text="Гравцю оголошується перемога, якщо: його чинний король протримається на престолі 1 хід без скидання з престолу, при цьому гравець вигукує &quot;Престол мій!&quot;; він ставить мат чинному королю противника." FontSize="14"/>
                     <LineBreak/>
                     <LineBreak/>
                     <Run Text="Гра оголошується нічийною, якщо: гравці зробили три однакові ходи; гравці зробили 50 ходів разом без взяття жодної фігури." FontSize="14"/>

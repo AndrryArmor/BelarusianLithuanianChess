@@ -21,15 +21,17 @@ namespace BelarusChess.UI.ViewModels
 {
     public class GameViewModel : ViewModelBase
     {
-        private readonly GameController _gameController;
-        private readonly GameWindow _gameWindow;
+        protected readonly GameWindow _gameWindow;
+        protected readonly GameController _gameController;
         private readonly List<PieceViewModel> _pieces;
-        private readonly Timer _oneSecondTimer = new Timer { Interval = 1000 };
-        private readonly List<HighlightViewModel> _highlights = new List<HighlightViewModel>();
-        private PieceViewModel _choosedPieceViewModel;
-        private Cell _cellToMakeMove;
+        protected readonly Timer _oneSecondTimer = new Timer { Interval = 1000 };
+        protected readonly List<HighlightViewModel> _highlights = new List<HighlightViewModel>();
+        protected PieceViewModel _choosedPieceViewModel;
+        protected Cell _cellToMakeMove;
         private string _whitePlayerState;
         private string _blackPlayerState;
+        private string _whitePlayerHighlight;
+        private string _blackPlayerHighlight;
         private TimeSpan _time;
         private bool _isNewGameButtonEnabled;
         private bool _isFinishGameButtonEnabled;
@@ -38,10 +40,10 @@ namespace BelarusChess.UI.ViewModels
         private RelayCommand _findAvailableCellsCommand;
         private RelayCommand _makeMoveCommand;
 
-        public GameViewModel(GameController gameController, GameWindow gameWindow)
+        public GameViewModel(GameWindow gameWindow)
         {
-            _gameController = gameController;
             _gameWindow = gameWindow;
+            _gameController = new GameController(new ChessEngine(new Chessboard()));
 
             _pieces = new List<PieceViewModel>(_gameController.GetAllPieces()
                 .Select(piece => new PieceViewModel(piece)));
@@ -71,6 +73,24 @@ namespace BelarusChess.UI.ViewModels
             set
             {
                 _blackPlayerState = value;
+                OnPropertyChanged();
+            }
+        }
+        public string WhitePlayerHighlight
+        {
+            get => _whitePlayerHighlight;
+            set
+            {
+                _whitePlayerHighlight = value;
+                OnPropertyChanged();
+            }
+        }
+        public string BlackPlayerHighlight
+        {
+            get => _blackPlayerHighlight;
+            set
+            {
+                _blackPlayerHighlight = value;
                 OnPropertyChanged();
             }
         }
@@ -104,7 +124,7 @@ namespace BelarusChess.UI.ViewModels
 
         #region Commands
 
-        public RelayCommand StartGameCommand
+        public virtual RelayCommand StartGameCommand
         {
             get
             {
@@ -112,10 +132,19 @@ namespace BelarusChess.UI.ViewModels
                 {
                     _gameController.StartGame();
 
-                    var whitePlayerState = _gameController.WhitePlayerState;
-                    var blackPlayerState = _gameController.BlackPlayerState;
-                    WhitePlayerState = Enum.GetName(whitePlayerState.GetType(), whitePlayerState);
-                    BlackPlayerState = Enum.GetName(blackPlayerState.GetType(), blackPlayerState);
+                    WhitePlayerState = _gameController.WhitePlayerState.GetName();
+                    BlackPlayerState = _gameController.BlackPlayerState.GetName();
+                    switch (_gameController.CurrentPlayer)
+                    {
+                        case PlayerColor.White:
+                            WhitePlayerHighlight = "#FFC8FFC8";
+                            BlackPlayerHighlight = "#00000000";
+                            break;
+                        case PlayerColor.Black:
+                            WhitePlayerHighlight = "#00000000";
+                            BlackPlayerHighlight = "#FFC8FFC8";
+                            break;
+                    }
 
                     Time = TimeSpan.Zero;
                     IsNewGameButtonEnabled = false;
@@ -125,7 +154,7 @@ namespace BelarusChess.UI.ViewModels
             }
         }
 
-        public RelayCommand FindAvailableCellsCommand
+        public virtual RelayCommand FindAvailableCellsCommand
         {
             get
             {
@@ -153,15 +182,26 @@ namespace BelarusChess.UI.ViewModels
             }
         }
 
-        public RelayCommand MakeMoveCommand
+        public virtual RelayCommand MakeMoveCommand
         {
             get
             {
                 return _makeMoveCommand ?? (_makeMoveCommand = new RelayCommand(obj =>
                 {
                     _gameController.MakeMove(_choosedPieceViewModel.Piece, _cellToMakeMove);
-                    WhitePlayerState = _gameController.WhitePlayerState.ToString();
-                    BlackPlayerState = _gameController.BlackPlayerState.ToString();
+                    WhitePlayerState = _gameController.WhitePlayerState.GetName();
+                    BlackPlayerState = _gameController.BlackPlayerState.GetName();
+                    switch (_gameController.CurrentPlayer)
+                    {
+                        case PlayerColor.White:
+                            WhitePlayerHighlight = "#FFC8FFC8";
+                            BlackPlayerHighlight = "#00000000";
+                            break;
+                        case PlayerColor.Black:
+                            WhitePlayerHighlight = "#00000000";
+                            BlackPlayerHighlight = "#FFC8FFC8";
+                            break;
+                    }
                     _highlights.ForEach(highlight => _gameWindow.grid.Children.Remove(highlight.Image));
                     _highlights.Clear();
 
@@ -176,7 +216,7 @@ namespace BelarusChess.UI.ViewModels
             }
         }
 
-        public RelayCommand FinishGameCommand
+        public virtual RelayCommand FinishGameCommand
         {
             get
             {

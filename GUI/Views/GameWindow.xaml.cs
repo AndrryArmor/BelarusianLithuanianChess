@@ -13,9 +13,19 @@ namespace BelarusChess.UI.Views
     /// <summary> Interaction logic for MainWindow.xaml </summary>
     public partial class GameWindow : Window
     {
-        public GameWindow()
+        public GameWindow(GamePlayMode gamePlayMode)
         {
             InitializeComponent();
+
+            switch (gamePlayMode)
+            {
+                case GamePlayMode.OnePC:
+                    DataContext = new GameViewModel(this);
+                    break;
+                case GamePlayMode.LocalNetwork:
+                    DataContext = new LocalNetworkGameViewModel(this);
+                    break;
+            }
         }
     }
 }

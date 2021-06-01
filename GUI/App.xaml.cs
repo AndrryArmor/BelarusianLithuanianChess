@@ -20,16 +20,7 @@ namespace BelarusChess
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-
-            var gameWindow = new GameWindow();
-            //gameWindow.DataContext = new GameViewModel(new GameController(new ChessEngine(new Chessboard())), gameWindow);
-            //gameWindow.Show();
-            var networkConnectionWindow = new NetworkConnectionWindow();
-            networkConnectionWindow.DataContext = new NetworkConnectionViewModel(new GameViewModel(new GameController(new ChessEngine(new Chessboard())), gameWindow), networkConnectionWindow);
-            if (networkConnectionWindow.ShowDialog() == true)
-                ShowMessage("Успіх!");
-            else
-                ShowMessage("Невдача");
+            new EnterWindow().Show();
         }
 
         public static MessageBoxResult ShowMessage(string message, bool isQuestion = false)
