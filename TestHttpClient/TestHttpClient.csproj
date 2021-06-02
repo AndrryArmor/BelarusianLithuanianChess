@@ -115,10 +115,6 @@
       <Project>{7EA7BC05-59B8-4AA2-9DBE-4FEDE6649A13}</Project>
       <Name>Core.Logic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\StringFormat\StringFormat.csproj">
-      <Project>{020c3cdb-ff83-4e19-97e9-6016c7edca43}</Project>
-      <Name>StringFormat</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
