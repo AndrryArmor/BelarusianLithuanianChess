@@ -34,7 +34,7 @@ namespace BelarusChess.Core.Logic
 
         public IEnumerable<Cell> FindAvailableCells(Piece piece)
         {
-            return piece.Color == CurrentPlayer
+            return piece.Color == CurrentPlayer && IsGameStarted
                 ? _engine.FindAvailableCells(piece)
                 : new List<Cell>();
         }

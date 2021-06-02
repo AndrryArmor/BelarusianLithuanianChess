@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
+using System.Windows;
 
 namespace BelarusChess.UI.ViewModels
 {
@@ -250,13 +251,13 @@ namespace BelarusChess.UI.ViewModels
             {
                 return _finishGameCommand ?? (_finishGameCommand = new RelayCommand(obj =>
                 {
-                    _gameController.FinishGame();
+                        _gameController.FinishGame();
 
-                    IsNewGameButtonEnabled = true;
-                    IsFinishGameButtonEnabled = false;
-                    _oneSecondTimer.Stop();
+                        IsNewGameButtonEnabled = true;
+                        IsFinishGameButtonEnabled = false;
+                        _oneSecondTimer.Stop();
 
-                    GameEndPoint.CloseConnnection();
+                        GameEndPoint.CloseConnnection();
                 }));
             }
         }

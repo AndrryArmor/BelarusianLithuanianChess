@@ -6,7 +6,7 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:utils="clr-namespace:BelarusChess.UI.Utils" xmlns:viewmodels="clr-namespace:BelarusChess.UI.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:GameViewModel}"
         mc:Ignorable="d"
-        Title="Білорусько-литовські шахи" WindowStartupLocation="CenterScreen" Width="815" Height="555" ResizeMode="CanMinimize" Icon="../Resources/BelarusChess.png">
+        Title="Білоруські шахи" WindowStartupLocation="CenterScreen" Width="815" Height="555" ResizeMode="CanMinimize" Icon="../Resources/BelarusChess.png" Closing="Window_Closing">
     <Window.Resources>
         <utils:TimeSpanToStringConverter x:Key="TimeSpanToStringConverter"/>
     </Window.Resources>

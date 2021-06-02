@@ -77,7 +77,7 @@ namespace BelarusChess.UI.ViewModels
 
                     GameServer gameServer = new GameServer();
 
-                    CreateGameStatus = "Сервер створено. Очікуємо на гравця...";
+                    CreateGameStatus = $"Ім'я сервера: {gameServer.IPAddress}\nГру створено. Очікуємо на гравця...";
 
                     Task.Run(async () =>
                     {
@@ -88,7 +88,7 @@ namespace BelarusChess.UI.ViewModels
                         _gameViewModel.GameEndPoint = gameServer;
                         await _networkConnectionWindow.Dispatcher.InvokeAsync(() =>
                         {
-                            CreateGameStatus = $"Клієнт {gameServer.Socket.RemoteEndPoint} успішно приєднався до гри";
+                            CreateGameStatus = $"Гравець {gameServer.Socket.RemoteEndPoint} успішно приєднався до гри";
                             
                         });
 
@@ -117,7 +117,7 @@ namespace BelarusChess.UI.ViewModels
                         switch (gameClient.HandshakeGameHost(ServerNameToJoin))
                         {
                             case SocketError.Success:
-                                App.ShowMessage($"Клієнт успішно під'єднався до сервера {ServerNameToJoin}!");
+                                App.ShowMessage($"Гравець успішно під'єднався до сервера {ServerNameToJoin}!");
 
                                 _gameViewModel.GameEndPoint = gameClient;
                                 _networkConnectionWindow.Dispatcher.InvokeAsync(() =>

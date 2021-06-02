@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BelarusChess.UI.Views" xmlns:viewmodels="clr-namespace:BelarusChess.UI.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:EnterWindowViewModel}"
         mc:Ignorable="d"
-        Title="Білорусько-литовські шахи" Height="415" Width="505" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="../Resources/BelarusChess.png">
+        Title="Білоруські шахи" Height="415" Width="505" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="../Resources/BelarusChess.png">
     <Window.Background>
         <ImageBrush ImageSource="../Resources/Chess image.png" Stretch="UniformToFill"/>
     </Window.Background>
@@ -16,10 +16,10 @@
                 <GradientStop Color="White"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <Button x:Name="buttonStart1PCGame" Content="Грати за 1 комп'ютером" Height="55" Margin="110,150,109,0" VerticalAlignment="Top" FontSize="20" HorizontalAlignment="Center" Width="276" Command="{Binding Start1PCGameCommand, Mode=OneWay}" CommandParameter="{Binding ElementName=windowEnterWindow, Mode=OneWay}"/>
-        <Button x:Name="buttonHelp" Content="Як грати" HorizontalAlignment="Center" Height="55" Margin="110,270,109,0" VerticalAlignment="Top" Width="276" FontSize="20" Command="{Binding HelpCommand, Mode=OneWay}"/>
-        <Button x:Name="buttonStartLocalNetworkGame" Content="Грати в локальній мережі" Height="55" Margin="110,210,109,0" VerticalAlignment="Top" FontSize="20" HorizontalAlignment="Center" Width="276" Command="{Binding StartLocalNetworkGameCommand, Mode=OneWay}" CommandParameter="{Binding ElementName=windowEnterWindow, Mode=OneWay}"/>
-        <TextBox HorizontalAlignment="Center" Height="135" Margin="0,10,0,0" TextWrapping="Wrap" Text="Білорусько-литовські шахи" VerticalAlignment="Top" Width="475" Background="{x:Null}" FontFamily="Monotype Corsiva" FontSize="48" FontWeight="Bold" BorderBrush="{x:Null}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsReadOnly="True" SelectionBrush="{x:Null}" BorderThickness="0" AllowDrop="False" Focusable="False" IsTabStop="False"/>
+        <Button x:Name="buttonStart1PCGame" Content="Грати за 1 комп'ютером" Height="55" Margin="110,125,109,0" VerticalAlignment="Top" FontSize="20" HorizontalAlignment="Center" Width="276" Command="{Binding Start1PCGameCommand, Mode=OneWay}" CommandParameter="{Binding ElementName=windowEnterWindow, Mode=OneWay}"/>
+        <Button x:Name="buttonHelp" Content="Як грати" HorizontalAlignment="Center" Height="55" Margin="110,275,109,0" VerticalAlignment="Top" Width="276" FontSize="20" Command="{Binding HelpCommand, Mode=OneWay}"/>
+        <Button x:Name="buttonStartLocalNetworkGame" Content="Грати в локальній мережі" Height="55" Margin="110,200,109,0" VerticalAlignment="Top" FontSize="20" HorizontalAlignment="Center" Width="276" Command="{Binding StartLocalNetworkGameCommand, Mode=OneWay}" CommandParameter="{Binding ElementName=windowEnterWindow, Mode=OneWay}"/>
+        <Label Content="Білоруські шахи" HorizontalAlignment="Center" Margin="0,30,0,0" VerticalAlignment="Top" FontFamily="Monotype Corsiva" FontSize="48" FontWeight="Bold"/>
 
     </Grid>
 </Window>

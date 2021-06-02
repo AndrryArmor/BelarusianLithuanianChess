@@ -27,5 +27,14 @@ namespace BelarusChess.UI.Views
                     break;
             }
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            MessageBoxResult messageBoxResult = App.ShowMessage("Справді завершити гру?", true);
+            if (messageBoxResult == MessageBoxResult.No)
+            {
+                e.Cancel = true;
+            }
+        }
     }
 }

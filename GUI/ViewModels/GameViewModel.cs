@@ -222,11 +222,15 @@ namespace BelarusChess.UI.ViewModels
             {
                 return _finishGameCommand ?? (_finishGameCommand = new RelayCommand(obj =>
                 {
-                    _gameController.FinishGame();
+                    var messageAnswer = App.ShowMessage("Справді завершити гру?", true);
+                    if (messageAnswer == MessageBoxResult.Yes)
+                    {
+                        _gameController.FinishGame();
 
-                    IsNewGameButtonEnabled = true;
-                    IsFinishGameButtonEnabled = false;
-                    _oneSecondTimer.Stop();
+                        IsNewGameButtonEnabled = true;
+                        IsFinishGameButtonEnabled = false;
+                        _oneSecondTimer.Stop();
+                    }
                 }));
             }
         }
